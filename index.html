@@ -72,6 +72,7 @@
 			align-items: center;
 			justify-content: space-between;
 			gap: 24px;
+			position: relative;
 		}
 
 		.logo {
@@ -97,7 +98,7 @@
 			box-shadow: 0 10px 30px rgba(0,0,0,0.35);
 		}
 
-		nav ul {
+		header nav ul {
 			display: flex;
 			gap: 28px;
 			list-style: none;
@@ -106,7 +107,7 @@
 			align-items: center;
 		}
 
-		nav a {
+		header nav a {
 			color: var(--muted);
 			text-decoration: none;
 			font-weight: 500;
@@ -114,9 +115,44 @@
 			transition: color 200ms ease, opacity 200ms ease;
 		}
 
-		nav a:hover {
+		header nav a:hover {
 			color: var(--text);
 			opacity: 0.9;
+		}
+
+		.nav-toggle {
+			display: none;
+			width: 42px;
+			height: 42px;
+			border-radius: 12px;
+			background: rgba(255, 255, 255, 0.06);
+			border: 1px solid rgba(255, 255, 255, 0.16);
+			cursor: pointer;
+			place-items: center;
+			gap: 5px;
+			padding: 0;
+		}
+
+		.nav-toggle span {
+			display: block;
+			width: 18px;
+			height: 2px;
+			background: rgba(255, 255, 255, 0.92);
+			border-radius: 999px;
+		}
+
+		header.nav-open .nav-toggle span:nth-child(1) {
+			transform: translateY(7px) rotate(45deg);
+		}
+		header.nav-open .nav-toggle span:nth-child(2) {
+			opacity: 0;
+		}
+		header.nav-open .nav-toggle span:nth-child(3) {
+			transform: translateY(-7px) rotate(-45deg);
+		}
+
+		.nav-toggle span {
+			transition: transform 180ms ease, opacity 180ms ease;
 		}
 
 		.btn {
@@ -709,8 +745,49 @@
 			:root {
 				--header-h: 72px;
 			}
-			nav ul {
-				gap: 18px;
+			.nav {
+				gap: 14px;
+			}
+			.nav-toggle {
+				display: grid;
+			}
+			header nav {
+				position: absolute;
+				top: calc(var(--header-h) - 6px);
+				left: 0;
+				right: 0;
+				width: min(560px, 95vw);
+				margin: 0 auto;
+				padding: 12px;
+				border-radius: 16px;
+				background: rgba(13, 13, 16, 0.92);
+				border: 1px solid rgba(255, 255, 255, 0.12);
+				backdrop-filter: blur(14px);
+				box-shadow: 0 22px 70px rgba(0, 0, 0, 0.55);
+				display: none;
+			}
+			header.nav-open nav {
+				display: block;
+			}
+			header nav ul {
+				flex-direction: column;
+				gap: 10px;
+				align-items: stretch;
+			}
+			header nav a {
+				display: block;
+				padding: 10px 12px;
+				border-radius: 12px;
+				background: rgba(255, 255, 255, 0.04);
+				border: 1px solid rgba(255, 255, 255, 0.08);
+			}
+			header nav a:hover {
+				background: rgba(255, 255, 255, 0.08);
+				opacity: 1;
+			}
+			.nav > .btn.btn-primary {
+				padding: 12px 16px;
+				font-size: 14px;
 			}
 			.hero-wrap {
 				padding-top: 56px;
@@ -718,6 +795,7 @@
 			}
 			.hero-media {
 				order: -1;
+				min-height: 320px;
 			}
 			.floating-card {
 				right: 12px;
@@ -731,9 +809,39 @@
 		}
 
 		@media (max-width: 640px) {
+			header nav {
+				width: 95vw;
+			}
+			.logo {
+				font-size: 18px;
+			}
+			.logo-mark {
+				width: 34px;
+				height: 34px;
+				border-radius: 12px;
+			}
+			.headline-line.first-line {
+				white-space: normal;
+			}
 			.hero-actions {
 				flex-direction: column;
 				align-items: flex-start;
+			}
+			.hero-actions .btn {
+				width: 100%;
+				justify-content: space-between;
+			}
+			.stats-row {
+				gap: 18px;
+			}
+			.stat {
+				min-width: 140px;
+			}
+			.hero-media {
+				min-height: 280px;
+			}
+			.floating-card.bottom-left {
+				left: 12px;
 			}
 			.metrics-bar {
 				grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
@@ -751,6 +859,12 @@
 			.modal-content {
 				width: 94vw;
 				padding: 28px 20px;
+			}
+			.modal-actions {
+				flex-direction: column;
+			}
+			.modal-actions .btn {
+				width: 100%;
 			}
 		}
 
@@ -918,6 +1032,11 @@
 					<div class="logo-mark">B</div>
 					<span>BackseatMedia</span>
 				</a>
+				<button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" onclick="toggleNav()">
+					<span></span>
+					<span></span>
+					<span></span>
+				</button>
 				<nav>
 					<ul>
 						<li><a href="#how-it-works">How It Works</a></li>
@@ -1288,6 +1407,28 @@
 			}
 		}
 
+		function setNavOpen(isOpen) {
+			const headerEl = document.querySelector('header');
+			const toggleBtn = document.querySelector('.nav-toggle');
+			if (!headerEl) return;
+
+			headerEl.classList.toggle('nav-open', isOpen);
+			if (toggleBtn) {
+				toggleBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+				toggleBtn.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
+			}
+		}
+
+		function toggleNav() {
+			const headerEl = document.querySelector('header');
+			if (!headerEl) return;
+			setNavOpen(!headerEl.classList.contains('nav-open'));
+		}
+
+		function closeNav() {
+			setNavOpen(false);
+		}
+
 		// Close modal when clicking outside
 		document.getElementById('contactModal').addEventListener('click', function(e) {
 			if (e.target === this) {
@@ -1299,6 +1440,7 @@
 		document.addEventListener('keydown', function(e) {
 			if (e.key === 'Escape') {
 				closeModal();
+				closeNav();
 			}
 		});
 
@@ -1383,6 +1525,7 @@
 				howLink.addEventListener('click', (e) => {
 					e.preventDefault();
 					scrollTitleNearCenter('how-title');
+					closeNav();
 				});
 			}
 
@@ -1391,8 +1534,25 @@
 				featuresLink.addEventListener('click', (e) => {
 					e.preventDefault();
 					scrollTitleNearCenter('why-title');
+					closeNav();
 				});
 			}
+
+			const contactLink = document.querySelector('header nav a[href="#contact"]');
+			if (contactLink) {
+				contactLink.addEventListener('click', () => {
+					closeNav();
+				});
+			}
+		});
+
+		// Close mobile nav when clicking outside the header
+		document.addEventListener('click', (e) => {
+			const headerEl = document.querySelector('header');
+			if (!headerEl) return;
+			if (!headerEl.classList.contains('nav-open')) return;
+			if (headerEl.contains(e.target)) return;
+			closeNav();
 		});
 	</script>
 </body>
