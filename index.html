@@ -897,6 +897,15 @@
 			.modal-content {
 				width: 94vw;
 				padding: 28px 20px;
+				max-height: 90vh;
+				overflow-y: auto;
+			}
+			.modal-header h3 {
+				font-size: 22px;
+			}
+			.modal-header .logo-mark {
+				width: 36px;
+				height: 36px;
 			}
 			.modal-actions {
 				flex-direction: column;
@@ -945,6 +954,15 @@
 
 		.modal-header {
 			margin-bottom: 24px;
+			text-align: center;
+		}
+
+		.modal-header .logo-mark {
+			margin: 0 auto 16px;
+		}
+
+		.modal-header-text {
+			width: 100%;
 		}
 
 		.modal-header h3 {
@@ -1354,6 +1372,9 @@
 		<div class="modal-content">
 			<button class="modal-close" aria-label="Close modal" onclick="closeModal()">&times;</button>
 			<div class="modal-header">
+				<div class="logo-mark">
+					<img src="pictures/backseatmedia logo.jpeg" alt="BackseatMedia logo" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+				</div>
 				<h3>Start Your Campaign</h3>
 				<p>Tell us about your advertising goals and we'll get back to you within 24h.</p>
 			</div>
@@ -1399,6 +1420,9 @@
 		<div class="modal-content">
 			<button class="modal-close" aria-label="Close modal" onclick="closeDriverModal()">&times;</button>
 			<div class="modal-header">
+				<div class="logo-mark">
+					<img src="pictures/backseatmedia logo.jpeg" alt="BackseatMedia logo" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+				</div>
 				<h3>Join as a <span style="color: #FFD600;">Driver</span></h3>
 				<p>Earn money by displaying advertisements in your taxi. We'll contact you within 24h.</p>
 			</div>
