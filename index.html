@@ -1096,7 +1096,7 @@
 					<ul>
 						<li><a href="#how-it-works">How It Works</a></li>
 						<li><a href="#features">Features</a></li>
-						<li><a href="#contact">Contact</a></li>
+						<li><a href="contact.html">Contact</a></li>
 					</ul>
 				</nav>
 				<button class="btn btn-primary" onclick="scrollToCampaign()">Get Started</button>
@@ -1322,7 +1322,7 @@
 					<button class="btn btn-primary" onclick="openModal()">Start Your Campaign <span aria-hidden="true">→</span></button>
 					<button class="btn btn-outline" onclick="window.location.href='contact.html'">Contact Sales</button>
 				</div>
-				<div class="cta-note">No minimum spend · Campaign live within 48 hours · Full analytics included</div>
+				<div class="cta-note">No minimum spend · Campaign live within 24h · Full analytics included</div>
 			</section>
 		</main>
 
@@ -1355,7 +1355,7 @@
 			<button class="modal-close" aria-label="Close modal" onclick="closeModal()">&times;</button>
 			<div class="modal-header">
 				<h3>Start Your Campaign</h3>
-				<p>Tell us about your advertising goals and we'll get back to you within 48 hours.</p>
+				<p>Tell us about your advertising goals and we'll get back to you within 24h.</p>
 			</div>
 			<form id="contactForm" onsubmit="handleSubmit(event)">
 				<div class="form-group">
@@ -1374,10 +1374,10 @@
 					<label for="impressions">Monthly Impressions</label>
 					<select id="impressions" name="impressions">
 						<option value="" disabled selected hidden>Select impression range</option>
-						<option value="under-500k">Up to 500K</option>
+						<option value="under-50k">Up to 50K</option>
+						<option value="50k-500k">50K - 500K</option>
 						<option value="500k-1m">500K - 1M</option>
-						<option value="1m-1.5m">1M - 1.5M</option>
-						<option value="1.5m-2m">1.5M - 2M</option>
+						<option value="1m-2m">1M - 2M</option>
 						<option value="2m-plus">2M+</option>
 					</select>
 				</div>
@@ -1399,8 +1399,8 @@
 		<div class="modal-content">
 			<button class="modal-close" aria-label="Close modal" onclick="closeDriverModal()">&times;</button>
 			<div class="modal-header">
-				<h3>Join as a Driver</h3>
-				<p>Earn money by displaying advertisements in your taxi. We'll contact you within 48 hours.</p>
+				<h3>Join as a <span style="color: #FFD600;">Driver</span></h3>
+				<p>Earn money by displaying advertisements in your taxi. We'll contact you within 24h.</p>
 			</div>
 			<form id="driverForm" onsubmit="handleDriverSubmit(event)">
 				<div class="form-group">
@@ -1678,7 +1678,7 @@
 				.then(result => {
 					if (result && (result.ok || result.status === 'success')) {
 						localStorage.setItem(SUBMIT_COOLDOWN_KEY, String(Date.now() + SUBMIT_COOLDOWN_MS));
-						statusEl.textContent = 'Thank you! We\'ll get back to you within 48 hours.';
+						statusEl.textContent = 'Thank you! We\'ll get back to you within 24 hours.';
 						setTimeout(() => {
 							closeModal();
 							e.target.reset();
