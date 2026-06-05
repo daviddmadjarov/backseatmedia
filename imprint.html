@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Imprint | BackseatMedia</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+	<style>
+		:root {
+			--header-h: 76px;
+			--bg: #050506;
+			--panel: #0d0d10;
+			--panel-strong: #111116;
+			--text: #f5f5f7;
+			--muted: #b6b6c0;
+			--accent: #ffffff;
+			--accent-soft: rgba(255, 255, 255, 0.08);
+			--border: rgba(255, 255, 255, 0.08);
+			--glow: rgba(255, 255, 255, 0.1);
+		}
+
+		* {
+			box-sizing: border-box;
+		}
+
+		body {
+			margin: 0;
+			font-family: 'Inter', system-ui, -apple-system, sans-serif;
+			background: var(--bg);
+			color: var(--text);
+			overflow-x: hidden;
+		}
+
+		.grid-bg {
+			position: fixed;
+			inset: 0;
+			background:
+				linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0) 35%),
+				radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.05), transparent 35%),
+				radial-gradient(circle at 70% 0%, rgba(255, 255, 255, 0.04), transparent 40%),
+				repeating-linear-gradient(0deg, transparent, transparent 46px, rgba(255, 255, 255, 0.03) 46px, rgba(255, 255, 255, 0.03) 48px),
+				repeating-linear-gradient(90deg, transparent, transparent 46px, rgba(255, 255, 255, 0.03) 46px, rgba(255, 255, 255, 0.03) 48px),
+				#050506;
+			z-index: 0;
+		}
+
+		.page {
+			position: relative;
+			z-index: 1;
+		}
+
+		header {
+			position: fixed;
+			top: 0;
+			left: 0;
+			right: 0;
+			height: var(--header-h);
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			backdrop-filter: blur(12px);
+			background: rgba(5, 5, 6, 0.72);
+			border-bottom: 1px solid var(--border);
+			z-index: 10;
+		}
+
+		.nav {
+			width: min(1360px, 95vw);
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 24px;
+			position: relative;
+		}
+
+		.logo {
+			display: flex;
+			align-items: center;
+			gap: 12px;
+			font-weight: 700;
+			font-size: 20px;
+			color: var(--text);
+			text-decoration: none;
+		}
+
+		.logo-mark {
+			width: 42px;
+			height: 42px;
+			border-radius: 12px;
+			background: linear-gradient(145deg, #fefefe, #d7d7e0);
+			color: #0b0b0d;
+			display: grid;
+			place-items: center;
+			font-weight: 800;
+			font-size: 18px;
+			box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+			flex-shrink: 0;
+		}
+
+		header nav {
+			display: flex;
+			align-items: center;
+			gap: 20px;
+		}
+
+		header nav a {
+			color: var(--text);
+			text-decoration: none;
+			font-size: 15px;
+			transition: opacity 150ms ease;
+		}
+
+		header nav a:hover {
+			opacity: 0.8;
+		}
+
+		/* Button styles (match contact page) */
+		.btn {
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			gap: 10px;
+			padding: 14px 22px;
+			border-radius: 12px;
+			font-weight: 700;
+			font-size: 15px;
+			border: 1px solid transparent;
+			cursor: pointer;
+			transition: transform 150ms ease, box-shadow 200ms ease, background 200ms ease, color 200ms ease, border-color 200ms ease;
+			text-decoration: none;
+			color: #0b0b0d;
+		}
+
+		.btn-primary {
+			background: #ffffff;
+			color: #0b0b0d;
+			box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+		}
+
+		.btn-primary:hover {
+			transform: translateY(-1px);
+			box-shadow: 0 15px 40px rgba(0, 0, 0, 0.45);
+		}
+
+		.legal-content {
+			width: min(900px, 95vw);
+			margin: calc(var(--header-h) + 60px) auto 60px;
+			padding: 0;
+		}
+
+		.legal-content h1 {
+			font-size: 42px;
+			margin: 0 0 12px;
+			letter-spacing: -0.5px;
+			font-weight: 800;
+		}
+
+		.legal-content h2 {
+			font-size: 22px;
+			margin: 32px 0 16px;
+			font-weight: 700;
+			letter-spacing: -0.3px;
+		}
+
+		.legal-content p {
+			color: var(--text);
+			font-size: 15px;
+			line-height: 1.8;
+			margin: 0 0 16px;
+		}
+
+		.legal-content strong {
+			color: var(--accent);
+		}
+
+		.info-block {
+			background: rgba(255, 255, 255, 0.04);
+			border: 1px solid var(--border);
+			border-radius: 12px;
+			padding: 20px;
+			margin: 24px 0;
+		}
+
+		.info-block p {
+			margin: 0 0 8px;
+		}
+
+		.info-block p:last-child {
+			margin-bottom: 0;
+		}
+
+		footer {
+			border-top: 1px solid var(--border);
+			padding: 32px 0 26px;
+			background: rgba(0, 0, 0, 0.55);
+		}
+
+		.footer-inner {
+			width: min(1360px, 95vw);
+			margin: 0 auto;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 20px;
+			flex-wrap: wrap;
+		}
+
+		.footer-links {
+			display: flex;
+			gap: 18px;
+			color: var(--muted);
+			font-size: 13px;
+		}
+
+		.footer-links a {
+			color: var(--muted);
+			text-decoration: none;
+			transition: color 160ms ease;
+		}
+
+		.footer-links a:hover {
+			color: var(--text);
+		}
+
+		.footer-bottom {
+			width: min(1360px, 95vw);
+			margin: 14px auto 0;
+			color: var(--muted);
+			font-size: 12px;
+			text-align: left;
+		}
+
+		@media (max-width: 640px) {
+			.logo {
+				font-size: 18px;
+			}
+
+			.logo-mark {
+				width: 34px;
+				height: 34px;
+				border-radius: 12px;
+			}
+
+			.legal-content h1 {
+				font-size: 28px;
+			}
+
+			.legal-content h2 {
+				font-size: 18px;
+			}
+
+			.footer-inner {
+				flex-direction: column;
+				align-items: flex-start;
+			}
+
+			.footer-links {
+				flex-wrap: wrap;
+			}
+		}
+	</style>
+</head>
+<body>
+	<div class="grid-bg"></div>
+
+	<header>
+		<nav class="nav">
+			<a href="index.html" class="logo">
+				<div class="logo-mark">B</div>
+				BackseatMedia
+			</a>
+			<a href="index.html" class="btn btn-primary">Back to Home</a>
+		</nav>
+	</header>
+
+	<div class="page">
+		<div class="legal-content">
+			<h1>Imprint</h1>
+
+			<h2>Information According to § 5 TMG / § 7 Abs. 1 ECG</h2>
+
+			<div class="info-block">
+				<p><strong>Company Name:</strong> BackseatMedia GmbH i.G.</p>
+				<p><strong>Business Type:</strong> Digital Advertising & Marketing Solutions</p>
+				<p><strong>Status:</strong> Proof of Concept / Early Stage</p>
+			</div>
+
+			<h2>Contact Information</h2>
+
+			<div class="info-block">
+				<p><strong>Email:</strong> office@backseatmedia.at</p>
+				<p><strong>Website:</strong> www.backseatmedia.at</p>
+				<p><strong>For inquiries:</strong> See our <a href="contact.html" style="color: var(--accent); text-decoration: none;">Contact Page</a></p>
+			</div>
+
+			<h2>Representation and Responsibility</h2>
+
+			<p>BackseatMedia is responsible for the content of this website in accordance with general laws. However, as service providers, we are not obligated to monitor transmitted or stored third-party information or to investigate circumstances that indicate illegal activity.</p>
+
+			<p>Our obligations to remove or block the use of information remain unaffected by this as per general laws. Any liability in this respect shall, however, only apply from the point in time at which we have obtained knowledge of the specific infringement.</p>
+
+			<h2>Limitations of Liability</h2>
+
+			<p>Our website and all content, information, and materials contained therein are provided on an "as-is" basis. BackseatMedia makes no representations or warranties of any kind, express or implied, regarding the operation of this website or the information, content, materials, or products included on this website.</p>
+
+			<p>To the fullest extent permissible by law, BackseatMedia disclaims all warranties, express or implied, including, but not limited to, implied warranties of merchantability and fitness for a particular purpose.</p>
+
+			<h2>External Links</h2>
+
+			<p>This website contains links to external websites ("external links"). As the content of these external websites is not under our control, we cannot accept liability for this external content. In general, the provider of the linked website is liable for its own content.</p>
+
+			<p>At the time the links were placed, the linked pages were checked for possible violations of law. No illegal content was detected at that time. However, we have no obligation to monitor permanently the content of linked websites. Should you discover any violation of law, please inform us immediately.</p>
+
+			<h2>Intellectual Property Rights</h2>
+
+			<p>The content and works created by BackseatMedia on these pages are subject to German copyright law. The duplication, processing, distribution, or any form of utilization beyond the limits of copyright law requires the written consent of the author or creator.</p>
+
+			<h2>Data Protection</h2>
+
+			<p>For information regarding our handling of personal data, please see our <a href="privacy-policy.html" style="color: var(--accent); text-decoration: none;">Privacy Policy</a>.</p>
+
+			<h2>Applicable Law</h2>
+
+			<p>This legal notice and the imprint shall be governed by and construed in accordance with the substantive laws of the jurisdiction in which BackseatMedia operates, without regard to its conflict of law provisions.</p>
+
+			<h2>Last Update</h2>
+
+			<p>This imprint was last updated on January 19, 2026. BackseatMedia GmbH i.G reserves the right to make changes to this imprint at any time.</p>
+		</div>
+	</div>
+
+	<footer>
+		<div class="footer-inner">
+			<div class="footer-links">
+				<a href="privacy-policy.html">Privacy</a>
+				<span style="color: var(--muted); font-size: 13px;">•</span>
+				<a href="terms-of-service.html">Terms</a>
+				<span style="color: var(--muted); font-size: 13px;">•</span>
+				<a href="imprint.html">Imprint</a>
+			</div>
+			<div class="footer-bottom">© 2026 BackseatMedia. All rights reserved.</div>
+		</div>
+	</footer>
+</body>
+</html>
